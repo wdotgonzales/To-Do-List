@@ -1,2 +1,2 @@
 # To-Do-List
-To Do List using Firebase (Authentication &amp; Firestore)
+To Do List using Javascript & Firebase (Authentication &amp; Firestore)
