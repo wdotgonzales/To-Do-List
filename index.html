@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        /* Show */
+        #toast-container {
+            position: fixed;
+            top: 20px;
+            /* Adjust the top value as needed */
+            left: 42%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.5s, transform 0.5s;
+            z-index: 1000;
+        }
+
+        #toast-container.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+
+
+<body class="bg-[#526D82]">
+
+    <!-- Navbar -->
+    <nav class="bg-white border-gray-200 dark:bg-[#27374D]">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
+                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">To Do</span>
+            </a>
+            <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+                <button type="button"
+                    class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                    id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown"
+                    data-dropdown-placement="bottom">
+                    <span class="sr-only">Open user menu</span>
+                    <img class="w-8 h-8 rounded-full" src="user.png" alt="user photo">
+                </button>
+                <!-- Dropdown menu -->
+                <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
+                    id="user-dropdown">
+                    <div class="px-4 py-3">
+                        <span id="emailPlaceholder"
+                            class="block text-sm text-gray-900 dark:text-white">name@flowbite.com</span>
+                        <span class="block text-sm  text-gray-500 truncate dark:text-gray-400"></span>
+                    </div>
+                    <ul class="py-2" aria-labelledby="user-menu-button">
+                        <li>
+                            <a id="signOutBtn" href="#"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign
+                                out</a>
+                        </li>
+                    </ul>
+                </div>
+                <button data-collapse-toggle="navbar-user" type="button"
+                    class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                    aria-controls="navbar-user" aria-expanded="false">
+                    <span class="sr-only">Open main menu</span>
+                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 17 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M1 1h15M1 7h15M1 13h15" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="text-[#DDE6ED]  max-w-full mx-auto md:max-w-[1245px]">
+
+        <!-- Task Fill UpForm -->
+        <div
+            class="max-w-w[100%] md:max-w-[50%] bg-[#27374D] p-[30px] mx-auto mt-5 border-2 border-white-500 rounded-md">
+            <p class="text-4xl mb-5 text-center">Enter a Task</p>
+
+            <div class="mb-5">
+                <label for="titleInput" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title
+                    :</label>
+                <input type="text" id="titleInput"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <p id="titleError" class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium"></p>
+            </div>
+
+            <div class="mb-5">
+                <label for="taskInput" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Task
+                    :</label>
+                <div class="col-span-2">
+                    <textarea id="taskInput" rows="4"
+                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Write product description here"></textarea>
+                </div>
+                <p id="taskError" class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium"></p>
+            </div>
+
+            <div class="mb-5">
+                <label for="dateInput" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date :
+                </label>
+                <input type="date" id="dateInput"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <p id="dateError" class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium"></p>
+            </div>
+
+            <button type="submit" id="submitTaskBtn"
+                class=" mt-3 w-full text-black bg-[#DDE6ED] hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Submit
+                Task</button>
+        </div>
+
+        <div class="mb-6 mt-6 max-w-w[100%] md:max-w-[50%] mx-auto">
+            <input type="text" id="searchTaskInput" placeholder="Search a task using title..."
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-[#DDE6ED] dark:border-gray-600 dark:placeholder-gray-700 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        </div>
+
+        <!-- Task Container -->
+        <div id="taskContainer" class="max-w-w[100%] md:max-w-[50%] mx-auto mt-5">
+            <!-- Task -->
+        </div>
+
+    </div>
+
+    <!-- Show Success Update Modal -->
+    <button class="hidden" id="showSuccessUpdateModalBtn">Show</button>
+    <div id="toast-container" class="updateTaskSuccessModal">
+        <div id="toast-simple"
+            class="flex items-center w-full max-w-xs p-4 space-x-4 rtl:space-x-reverse text-gray-500 bg-white divide-x rtl:divide-x-reverse divide-gray-200 rounded-lg shadow dark:text-gray-400 dark:divide-gray-700 space-x dark:bg-gray-800"
+            role="alert">
+            <svg class="w-5 h-5 text-blue-600 dark:text-blue-500 rotate-45" aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="m9 17 8 2L9 1 1 19l8-2Zm0 0V9" />
+            </svg>
+            <div class="ps-4 text-sm font-normal">Task updated successfully.</div>
+        </div>
+    </div>
+
+    <!-- Add task sucessfully modal -->
+    <button class="hidden" id="showAddTaskSuccessModalBtn">Show</button>
+    <div id="toast-container" class="addTaskSuccessModal">
+        <div id="toast-simple"
+            class="flex items-center w-full max-w-xs p-4 space-x-4 rtl:space-x-reverse text-gray-500 bg-white divide-x rtl:divide-x-reverse divide-gray-200 rounded-lg shadow dark:text-gray-400 dark:divide-gray-700 space-x dark:bg-gray-800"
+            role="alert">
+            <svg class="w-5 h-5 text-blue-600 dark:text-blue-500 rotate-45" aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="m9 17 8 2L9 1 1 19l8-2Zm0 0V9" />
+            </svg>
+            <div class="ps-4 text-sm font-normal">Task added successfully.</div>
+        </div>
+    </div>
+
+    <!-- Delete task successfully modal -->
+    <button class="hidden" id="showDeleteSucessModalBtn">Show</button>
+    <div id="toast-container" class="deleteSuccessModal">
+        <div id="toast-simple"
+            class="flex items-center w-full max-w-xs p-4 space-x-4 rtl:space-x-reverse text-gray-500 bg-white divide-x rtl:divide-x-reverse divide-gray-200 rounded-lg shadow dark:text-gray-400 dark:divide-gray-700 space-x dark:bg-gray-800"
+            role="alert">
+            <svg class="w-5 h-5 text-blue-600 dark:text-blue-500 rotate-45" aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="m9 17 8 2L9 1 1 19l8-2Zm0 0V9" />
+            </svg>
+            <div class="ps-4 text-sm font-normal">Task deleted successfully.</div>
+        </div>
+    </div>
+
+    <script src="js/main/index.js" type="module"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
+
+</body>
+
+</html>
+
+
